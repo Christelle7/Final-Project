@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Storyitems from './components/storyitems';
-
+import PuppyImage from './components/puppies';
 
 class App extends Component {
 
@@ -10,6 +9,11 @@ class App extends Component {
   };
 
   componentDidMount(){
+    this.callApi();  
+    
+  }
+
+  callApi=()=>{
     console.log('here');
       fetch('https://random.dog/woof.json')
       .then(data => data.json())
@@ -18,14 +22,17 @@ class App extends Component {
         this.setState({dogurl:dogurl.url})
         
       })  
-    
+
   }
   
   render() {
     return (
       <div className="App">
           <h1>  DOGS </h1>
-          <div> <img src={this.state.dogurl} /> </div>
+          <PuppyImage 
+            url={this.state.dogurl}
+          />
+          <button onClick ={this.callApi}> Puppy Love </button>
       </div>
     );
   }
